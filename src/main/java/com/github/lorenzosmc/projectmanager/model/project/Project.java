@@ -1,11 +1,16 @@
 package com.github.lorenzosmc.projectmanager.model.project;
 
+import java.time.Instant;
+
+import com.github.lorenzosmc.projectmanager.model.user.User;
 
 public class Project {
 	private Long id;
 	private String name;
 	//FIXME 'statement' should allow for storing rich text
 	private String statement;
+	private User creator;
+	private Instant creationDate; 
 	private ProjectStatus status;
 	private boolean visible;
 	
@@ -89,7 +94,23 @@ public class Project {
 	public void setStatement(String statement) {
 		this.statement = statement;
 	}
+	
+	public User getCreator() {
+		return creator;
+	}
 
+	public void setCreator(User creator) {
+		this.creator = creator;
+	}
+
+	public Instant getCreationDate() {
+		return creationDate;
+	}
+
+	public void setCreationDate(Instant creationDate) {
+		this.creationDate = creationDate;
+	}
+	
 	public boolean isVisible() {
 		return visible;
 	}

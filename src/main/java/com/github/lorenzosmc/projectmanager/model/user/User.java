@@ -5,6 +5,7 @@ import java.util.List;
 import com.github.lorenzosmc.projectmanager.model.context.Context;
 import com.github.lorenzosmc.projectmanager.model.notification.Notification;
 import com.github.lorenzosmc.projectmanager.model.notification.Subscriber;
+import com.github.lorenzosmc.projectmanager.model.project.Project;
 
 public class User implements Subscriber {
 	private Long id;
@@ -24,6 +25,7 @@ public class User implements Subscriber {
 	private UserRole role;
 	private String about;
 	private List<Context> createdContexts;
+	private List<Project> createdProjects;
 
 	public void update(Notification notification) {
 		this.addNotification(notification);
@@ -168,12 +170,25 @@ public class User implements Subscriber {
 	public void setAbout(String about) {
 		this.about = about;
 	}
-
+	
+	//FIXME add getter
 	public void addCreatedContext(Context context) {
 		createdContexts.add(context);
 	}
 	
 	public boolean removeCreatedContext(Context context) {
 		return createdContexts.remove(context) ? true : false;
+	}
+
+	public List<Project> getCreatedProjects() {
+		return createdProjects;
+	}
+	
+	public void addCreatedProject(Project project) {
+		createdProjects.add(project);
+	}
+	
+	public boolean removeCreatedProject(Project project){
+		return createdProjects.remove(project) ? true : false;
 	}
 }

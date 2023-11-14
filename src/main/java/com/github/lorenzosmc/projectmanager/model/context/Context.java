@@ -4,6 +4,7 @@ import java.time.Instant;
 import java.util.List;
 
 import com.github.lorenzosmc.projectmanager.model.notification.Publisher;
+import com.github.lorenzosmc.projectmanager.model.project.Project;
 import com.github.lorenzosmc.projectmanager.model.user.User;
 
 public class Context extends Publisher{
@@ -11,12 +12,14 @@ public class Context extends Publisher{
 	private String name;
 	private User creator;
 	private Instant creationDate;
+	private List<Project> projects;
 	private boolean locked;
 	private boolean hidden;
 	// FIXME: better way to store passwords?
 	private String password;
 	private List<Tag> tags;
 	
+	//FIXME add getter
 	//FIXME defensive copy
 	public void addTag(Tag tag) {
 		tags.add(tag);
@@ -56,6 +59,15 @@ public class Context extends Publisher{
 
 	public void setCreationDate(Instant creationDate) {
 		this.creationDate = creationDate;
+	}
+	
+	//FIXME add getter
+	public void addProject(Project project) {
+		projects.add(project);
+	}
+	
+	public boolean removeProject(Project project) {
+		return projects.remove(project) ? true : false;
 	}
 	
 	public boolean isLocked() {
