@@ -1,17 +1,20 @@
 package com.github.lorenzosmc.projectmanager.model.context;
 
+import java.time.Instant;
 import java.util.List;
 
 import com.github.lorenzosmc.projectmanager.model.notification.Publisher;
+import com.github.lorenzosmc.projectmanager.model.user.User;
 
 public class Context extends Publisher{
 	private Long id;
 	private String name;
+	private User creator;
+	private Instant creationDate;
 	private boolean locked;
 	private boolean hidden;
 	// FIXME: better way to store passwords?
 	private String password;
-
 	private List<Tag> tags;
 	
 	//FIXME defensive copy
@@ -39,6 +42,22 @@ public class Context extends Publisher{
 		this.name = name;
 	}
 
+	public User getCreator() {
+		return creator;
+	}
+
+	public void setCreator(User creator) {
+		this.creator = creator;
+	}
+	
+	public Instant getCreationDate() {
+		return creationDate;
+	}
+
+	public void setCreationDate(Instant creationDate) {
+		this.creationDate = creationDate;
+	}
+	
 	public boolean isLocked() {
 		return locked;
 	}
@@ -54,7 +73,7 @@ public class Context extends Publisher{
 	public void setHidden(boolean hidden) {
 		this.hidden = hidden;
 	}
-
+		
 	// FIXME: better way to get passwords?
 	public String getPassword() {
 		return password;

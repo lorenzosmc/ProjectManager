@@ -2,6 +2,7 @@ package com.github.lorenzosmc.projectmanager.model.user;
 
 import java.util.List;
 
+import com.github.lorenzosmc.projectmanager.model.context.Context;
 import com.github.lorenzosmc.projectmanager.model.notification.Notification;
 import com.github.lorenzosmc.projectmanager.model.notification.Subscriber;
 
@@ -22,6 +23,7 @@ public class User implements Subscriber {
 	private List<Notification> unviewedNotifications;
 	private UserRole role;
 	private String about;
+	private List<Context> createdContexts;
 
 	public void update(Notification notification) {
 		this.addNotification(notification);
@@ -70,7 +72,7 @@ public class User implements Subscriber {
 
 		return false;
 	}
-
+	
 	public Long getId() {
 		return id;
 	}
@@ -167,4 +169,11 @@ public class User implements Subscriber {
 		this.about = about;
 	}
 
+	public void addCreatedContext(Context context) {
+		createdContexts.add(context);
+	}
+	
+	public boolean removeCreatedContext(Context context) {
+		return createdContexts.remove(context) ? true : false;
+	}
 }
