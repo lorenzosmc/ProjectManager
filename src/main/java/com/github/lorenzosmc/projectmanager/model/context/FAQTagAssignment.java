@@ -1,8 +1,7 @@
-package com.github.lorenzosmc.projectmanager.model.faq;
+package com.github.lorenzosmc.projectmanager.model.context;
 
 import java.time.Instant;
 
-import com.github.lorenzosmc.projectmanager.model.context.Tag;
 import com.github.lorenzosmc.projectmanager.model.user.User;
 
 public class FAQTagAssignment {

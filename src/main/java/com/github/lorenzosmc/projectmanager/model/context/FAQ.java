@@ -1,4 +1,4 @@
-package com.github.lorenzosmc.projectmanager.model.faq;
+package com.github.lorenzosmc.projectmanager.model.context;
 
 import java.time.Instant;
 import java.util.List;
@@ -16,6 +16,7 @@ public class FAQ {
 	private FAQStatus status;
 	private Instant creationDate;
 	private Instant lastModified;
+	private boolean visible;
 	private List<Project> citedProjects;
 	private List<Resource> citedResources;
 	private List<Topic> citedTopics;
@@ -62,6 +63,14 @@ public class FAQ {
 		this.lastModified = lastModified;
 	}
 	
+	public boolean isVisible() {
+		return visible;
+	}
+
+	public void setVisible(boolean visible) {
+		this.visible = visible;
+	}
+
 	public List<Project> getCitedProjects() {
 		return List.copyOf(citedProjects);
 	}
