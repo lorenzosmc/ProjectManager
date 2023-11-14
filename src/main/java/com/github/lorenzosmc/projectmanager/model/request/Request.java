@@ -2,6 +2,7 @@ package com.github.lorenzosmc.projectmanager.model.request;
 
 import java.time.Duration;
 
+import com.github.lorenzosmc.projectmanager.model.appointment.Appointment;
 import com.github.lorenzosmc.projectmanager.model.notification.Notification;
 import com.github.lorenzosmc.projectmanager.model.notification.NotificationReason;
 import com.github.lorenzosmc.projectmanager.model.notification.NotificationType;
@@ -11,14 +12,13 @@ import com.github.lorenzosmc.projectmanager.model.project.Project;
 public class Request extends Publisher {
 	private Long id;
 	private RequestType type;
+	private String message;
 	private RequestStatus status;
 	private String reasonOfDenial;
-	private String message;
-	private String meetingTopic;
-	private Duration meetingDuration;
+	private Appointment appointment;
 	private boolean meetingWithCollaborators;
-	private boolean projectProposalWithCollaborators;
 	private Project projectProposalDraft;
+	private boolean projectProposalWithCollaborators;
 
 	public boolean accept() {
 		if (isPending()) {
@@ -54,7 +54,6 @@ public class Request extends Publisher {
 	public boolean isAccepted() {
 		return status == RequestStatus.ACCEPTED;
 	}
-
 	
 	public boolean isDenied() {
 		return status == RequestStatus.DENIED;
@@ -71,6 +70,14 @@ public class Request extends Publisher {
 	public void setType(RequestType type) {
 		this.type = type;
 	}
+	
+	public String getMessage() {
+		return message;
+	}
+
+	public void setMessage(String message) {
+		this.message = message;
+	}
 
 	public String getReasonOfDenial() {
 		return reasonOfDenial;
@@ -80,28 +87,12 @@ public class Request extends Publisher {
 		this.reasonOfDenial = reasonOfDenial;
 	}
 
-	public String getMessage() {
-		return message;
+	public Appointment getMeeting() {
+		return appointment;
 	}
 
-	public void setMessage(String message) {
-		this.message = message;
-	}
-
-	public String getMeetingTopic() {
-		return meetingTopic;
-	}
-
-	public void setMeetingTopic(String meetingTopic) {
-		this.meetingTopic = meetingTopic;
-	}
-
-	public Duration getMeetingDuration() {
-		return meetingDuration;
-	}
-
-	public void setMeetingDuration(Duration meetingDuration) {
-		this.meetingDuration = meetingDuration;
+	public void setMeeting(Appointment appointment) {
+		this.appointment = appointment;
 	}
 
 	public boolean isMeetingWithCollaborators() {
@@ -112,19 +103,19 @@ public class Request extends Publisher {
 		this.meetingWithCollaborators = meetingWithCollaborators;
 	}
 
-	public boolean isProjectProposalWithCollaborators() {
-		return projectProposalWithCollaborators;
-	}
-
-	public void setProjectProposalWithCollaborators(boolean projectProposalWithCollaborators) {
-		this.projectProposalWithCollaborators = projectProposalWithCollaborators;
-	}
-
 	public Project getProjectProposalDraft() {
 		return projectProposalDraft;
 	}
 
 	public void setProjectProposalDraft(Project projectProposalDraft) {
 		this.projectProposalDraft = projectProposalDraft;
+	}
+	
+	public boolean isProjectProposalWithCollaborators() {
+		return projectProposalWithCollaborators;
+	}
+
+	public void setProjectProposalWithCollaborators(boolean projectProposalWithCollaborators) {
+		this.projectProposalWithCollaborators = projectProposalWithCollaborators;
 	}
 }
