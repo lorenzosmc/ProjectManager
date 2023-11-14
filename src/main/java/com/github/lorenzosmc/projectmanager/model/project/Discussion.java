@@ -1,4 +1,4 @@
-package com.github.lorenzosmc.projectmanager.model.projectassignment;
+package com.github.lorenzosmc.projectmanager.model.project;
 
 import java.util.List;
 

@@ -3,12 +3,11 @@ package com.github.lorenzosmc.projectmanager.model.faq;
 import java.time.Instant;
 import java.util.List;
 
+import com.github.lorenzosmc.projectmanager.model.project.Discussion;
+import com.github.lorenzosmc.projectmanager.model.project.Message;
 import com.github.lorenzosmc.projectmanager.model.project.Project;
-import com.github.lorenzosmc.projectmanager.model.projectassignment.Discussion;
-import com.github.lorenzosmc.projectmanager.model.projectassignment.Message;
-import com.github.lorenzosmc.projectmanager.model.projectassignment.ProjectAssignment;
-import com.github.lorenzosmc.projectmanager.model.projectassignment.Resource;
-import com.github.lorenzosmc.projectmanager.model.projectassignment.Topic;
+import com.github.lorenzosmc.projectmanager.model.project.Resource;
+import com.github.lorenzosmc.projectmanager.model.project.Topic;
 
 public class FAQ {
 	private String question;
@@ -18,7 +17,6 @@ public class FAQ {
 	private Instant creationDate;
 	private Instant lastModified;
 	private List<Project> citedProjects;
-	private List<ProjectAssignment> citedProjectAssignments;
 	private List<Resource> citedResources;
 	private List<Topic> citedTopics;
 	private List<Discussion> citedDiscussions;
@@ -74,18 +72,6 @@ public class FAQ {
 	
 	public boolean removeCitedProject(Project project) {
 		return citedProjects.remove(project) ? true : false;
-	}
-	
-	public List<ProjectAssignment> getCitedProjectAssignments() {
-		return List.copyOf(citedProjectAssignments);
-	}
-
-	public void addCitedProjectAssignment(ProjectAssignment projectAssignment) {
-		citedProjectAssignments.add(projectAssignment);
-	}
-	
-	public boolean removeCitedProjectAssignment(ProjectAssignment projectAssignment) {
-		return citedProjectAssignments.remove(projectAssignment) ? true : false;
 	}
 	
 	public List<Resource> getCitedResources() {

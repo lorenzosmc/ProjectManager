@@ -3,25 +3,25 @@ package com.github.lorenzosmc.projectmanager.model.context;
 import java.time.Instant;
 import java.util.List;
 
-import com.github.lorenzosmc.projectmanager.model.projectassignment.ProjectAssignment;
+import com.github.lorenzosmc.projectmanager.model.project.Project;
 import com.github.lorenzosmc.projectmanager.model.user.User;
 
 public class ContextCollaboration {
 	private User collaborator;
 	private Context context;
 	private Instant startDate;
-	private List<ProjectAssignment> collaborations;
+	private List<Project> collaborations;
 	private int maxProjects;
 
-	public List<ProjectAssignment> getCollaborations() {
+	public List<Project> getCollaborations() {
 		return List.copyOf(collaborations);
 	}
 
-	public void addCollaboration(ProjectAssignment collaboration) {
+	public void addCollaboration(Project collaboration) {
 		collaborations.add(collaboration);
 	}
 	
-	public boolean removeCollaboration(ProjectAssignment collaboration) {
+	public boolean removeCollaboration(Project collaboration) {
 		return collaborations.remove(collaboration) ? true : false;
 	}
 		

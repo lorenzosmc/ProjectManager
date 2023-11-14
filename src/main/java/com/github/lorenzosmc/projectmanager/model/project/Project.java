@@ -1,18 +1,39 @@
 package com.github.lorenzosmc.projectmanager.model.project;
 
 import java.time.Instant;
+import java.util.List;
 
+import com.github.lorenzosmc.projectmanager.model.appointment.Appointment;
 import com.github.lorenzosmc.projectmanager.model.user.User;
+import com.github.lorenzosmc.projectmanager.model.workgroup.Workgroup;
 
 public class Project {
 	private Long id;
 	private String name;
-	//FIXME 'statement' should allow for storing rich text
-	private String statement;
 	private User creator;
-	private Instant creationDate; 
-	private ProjectStatus status;
+	private Instant creationDate;
+	//TODO sub-statements?
+	private String statement;
 	private boolean visible;
+	//FIXME how would status work when a workgroup has already been assigned but others have to work on it. 
+	// does it work in SEPERATE stages? Or can it work in parallel.
+	private ProjectStatus status;
+	private int progress;
+	private Instant lastUpdate;
+	//FIXME make collection
+	private Workgroup workgroup;
+	//TODO add number of sub projects.
+	
+	
+	//FIXME these should be in workgroup
+	private Appointment exam;
+	private Instant dateOfAssignment;
+	// private int progress; for each workgroup 
+	
+	//FIXME how do these work when multiple workgroups work on the project?
+	private List<ProjectProgressReview> reviews;
+	private List<Topic> topics;
+	private List<Resource> resources;
 	
 	public boolean isDrafted() {
 		return status == ProjectStatus.DRAFTED;
@@ -64,13 +85,9 @@ public class Project {
 						
 		default:
 			return false;
-	}
+		}
 	
-	return true;
-	}
-	
-	public Long getId() {
-		return id;
+		return true;
 	}
 	
 	public String getName() {
@@ -112,4 +129,90 @@ public class Project {
 	public void setVisible(boolean visible) {
 		this.visible = visible;
 	}
+	
+	public List<ProjectProgressReview> getReviews() {
+		return reviews;
+	}
+
+	public void addReview(ProjectProgressReview review) {
+		reviews.add(review);
+	}
+	
+	public void removeReview(ProjectProgressReview review) {
+		reviews.remove(review);
+	}
+	
+	public List<Topic> getTopics() {
+		return topics;
+	}
+	
+	public void addTopic(Topic topic) {
+		topics.add(topic);
+	}
+	
+	public void removeTopic(Topic topic) {
+		topics.remove(topic);
+	}
+	
+	public List<Resource> getResources() {
+		return resources;
+	}	
+	
+	public void addResource(Resource resource) {
+		resources.add(resource);
+	}
+	
+	public void removeResource(Resource resource) {
+		resources.remove(resource);
+	}
+	
+	public Workgroup getWorkgroup() {
+		return workgroup;
+	}
+
+	public void setWorkgroup(Workgroup workgroup) {
+		this.workgroup = workgroup;
+	}
+
+	public Instant getDateOfAssignment() {
+		return dateOfAssignment;
+	}
+
+	public void setDateOfAssignment(Instant dateOfAssignment) {
+		this.dateOfAssignment = dateOfAssignment;
+	}
+
+	public Instant getLastUpdate() {
+		return lastUpdate;
+	}
+
+	public void setLastUpdate(Instant lastUpdate) {
+		this.lastUpdate = lastUpdate;
+	}
+	
+	public int getProgress() {
+		return progress;
+	}
+
+	public void setProgress(int progress) {
+		if(progress < 0)
+			this.progress = 0;
+		else if(progress > 100)
+			this.progress = 100;
+		else
+			this.progress = progress;
+	}
+
+	public Appointment getExam() {
+		return exam;
+	}
+
+	public void setExam(Appointment exam) {
+		this.exam = exam;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
 }
