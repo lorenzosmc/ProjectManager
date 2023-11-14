@@ -8,7 +8,10 @@ import com.github.lorenzosmc.projectmanager.model.notification.Publisher;
 public class Discussion extends Publisher{
 	private List<Message> comments;
 	
-	//FIXME defensive copy
+	public List<Message> getComments() {
+		return List.copyOf(comments);
+	}
+
 	public void addMessage(Message message) {
 		comments.add(message);
 	}

@@ -14,27 +14,22 @@ public class Project {
 	private ProjectStatus status;
 	private boolean visible;
 	
-	//FIXME does this have any business being here? Perhaps it should go in the Business Logic.
 	public boolean isDrafted() {
 		return status == ProjectStatus.DRAFTED;
 	}
 
-	//FIXME does this have any business being here? Perhaps it should go in the Business Logic.
 	public boolean isUnassigned() {
 		return status == ProjectStatus.UNASSIGNED;
 	}
 	
-	//FIXME does this have any business being here? Perhaps it should go in the Business Logic.
 	public boolean isActive() {
 		return status == ProjectStatus.ACTIVE;
 	}
 	
-	//FIXME does this have any business being here? Perhaps it should go in the Business Logic.
 	public boolean isArchived() {
 		return status == ProjectStatus.ARCHIVED;
 	}
 	
-	//FIXME does this have any business being here? Perhaps it should go in the Business Logic.
 	public boolean advanceState() {
 		switch(status) {
 			case DRAFTED:
@@ -56,7 +51,6 @@ public class Project {
 		return true;
 	}
 	
-	//FIXME does this have any business being here? Perhaps it should go in the Business Logic.
 	public boolean regressState() {
 		switch(status) {
 		case ARCHIVED:

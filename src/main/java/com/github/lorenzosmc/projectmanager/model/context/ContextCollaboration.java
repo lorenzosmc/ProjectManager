@@ -13,6 +13,10 @@ public class ContextCollaboration {
 	private List<ProjectAssignment> collaborations;
 	private int maxProjects;
 
+	public List<ProjectAssignment> getCollaborations() {
+		return List.copyOf(collaborations);
+	}
+
 	public void addCollaboration(ProjectAssignment collaboration) {
 		collaborations.add(collaboration);
 	}

@@ -28,12 +28,10 @@ public class Notification {
 		this.type = type;
 	}
 
-	// FIXME defensive copy
 	public Object getObject() {
 		return object;
 	}
 
-	// FIXME defensive copy
 	public void setObject(Object object) {
 		this.object = object;
 	}

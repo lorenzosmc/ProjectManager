@@ -13,14 +13,16 @@ public class ProjectAssignment {
 	private Project project;
 	private Instant dateOfAssignment;
 	private Instant lastUpdate;
-	// FIXME how is progress measured?
 	private int progress;
 	private Appointment exam;
 	private List<ProjectProgressReview> reviews;
 	private List<Topic> topics;
 	private List<Resource> resources;
 	
-	//FIXME defensive copy
+	public List<ProjectProgressReview> getReviews() {
+		return reviews;
+	}
+
 	public void addReview(ProjectProgressReview review) {
 		reviews.add(review);
 	}
@@ -29,22 +31,28 @@ public class ProjectAssignment {
 		reviews.remove(review);
 	}
 	
-	//FIXME defensive copy
-	public void addResource(Resource resource) {
-		resources.add(resource);
+	public List<Topic> getTopics() {
+		return topics;
 	}
 	
-	public void removeResource(Resource resource) {
-		resources.remove(resource);
-	}
-
-	//FIXME defensive copy
 	public void addTopic(Topic topic) {
 		topics.add(topic);
 	}
 	
 	public void removeTopic(Topic topic) {
 		topics.remove(topic);
+	}
+	
+	public List<Resource> getResources() {
+		return resources;
+	}	
+	
+	public void addResource(Resource resource) {
+		resources.add(resource);
+	}
+	
+	public void removeResource(Resource resource) {
+		resources.remove(resource);
 	}
 	
 	public Workgroup getWorkgroup() {
@@ -79,14 +87,17 @@ public class ProjectAssignment {
 		this.lastUpdate = lastUpdate;
 	}
 	
-	// FIXME how is progress measured?
 	public int getProgress() {
 		return progress;
 	}
 
-	// FIXME how is progress measured?
 	public void setProgress(int progress) {
-		this.progress = progress;
+		if(progress < 0)
+			this.progress = 0;
+		else if(progress > 100)
+			this.progress = 100;
+		else
+			this.progress = progress;
 	}
 
 	public Appointment getExam() {

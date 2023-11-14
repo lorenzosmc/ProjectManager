@@ -6,7 +6,6 @@ import com.github.lorenzosmc.projectmanager.model.user.User;
 
 public class Topic {
 	private String title;
-	// FIXME support for rich text?
 	private String content;
 	private Instant creationDate;
 	private boolean locked;
@@ -22,12 +21,10 @@ public class Topic {
 		this.title = title;
 	}
 
-	// FIXME support for rich text?
 	public String getContent() {
 		return content;
 	}
 
-	// FIXME support for rich text?
 	public void setContent(String content) {
 		this.content = content;
 	}
@@ -64,12 +61,10 @@ public class Topic {
 		this.creator = creator;
 	}
 	
-	//FIXME defensive copy
 	public Discussion getDiscussion() {
 		return discussion;
 	}
 	
-	//FIXME defensive copy
 	public void setDiscussion(Discussion discussion) {
 		this.discussion = discussion;
 	}

@@ -19,8 +19,10 @@ public class Context extends Publisher{
 	private String password;
 	private List<Tag> tags;
 	
-	//FIXME add getter
-	//FIXME defensive copy
+	public List<Tag> getTags() {
+		return List.copyOf(tags);
+	}
+
 	public void addTag(Tag tag) {
 		tags.add(tag);
 	}
@@ -61,7 +63,10 @@ public class Context extends Publisher{
 		this.creationDate = creationDate;
 	}
 	
-	//FIXME add getter
+	public List<Project> getProjects() {
+		return projects;
+	}
+
 	public void addProject(Project project) {
 		projects.add(project);
 	}

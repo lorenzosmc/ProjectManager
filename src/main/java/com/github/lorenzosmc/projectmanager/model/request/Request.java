@@ -13,7 +13,6 @@ public class Request extends Publisher {
 	private RequestType type;
 	private RequestStatus status;
 	private String reasonOfDenial;
-	//FIXME what is the purpose of 'message'?
 	private String message;
 	private String meetingTopic;
 	private Duration meetingDuration;

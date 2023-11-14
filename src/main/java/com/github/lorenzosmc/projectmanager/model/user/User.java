@@ -137,12 +137,10 @@ public class User implements Subscriber {
 		this.password = password;
 	}
 
-	// FIXME defensive copy needed?
 	public byte[] getProfilePicture() {
 		return profilePicture;
 	}
 
-	// FIXME defensive copy needed?
 	public void setProfilePicture(byte[] profilePicture) {
 		this.profilePicture = profilePicture;
 	}
@@ -171,7 +169,10 @@ public class User implements Subscriber {
 		this.about = about;
 	}
 	
-	//FIXME add getter
+	public List<Context> getCreatedContexts() {
+		return List.copyOf(createdContexts);
+	}
+
 	public void addCreatedContext(Context context) {
 		createdContexts.add(context);
 	}
@@ -181,7 +182,7 @@ public class User implements Subscriber {
 	}
 
 	public List<Project> getCreatedProjects() {
-		return createdProjects;
+		return List.copyOf(createdProjects);
 	}
 	
 	public void addCreatedProject(Project project) {

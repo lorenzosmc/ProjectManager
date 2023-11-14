@@ -64,6 +64,10 @@ public class FAQ {
 		this.lastModified = lastModified;
 	}
 	
+	public List<Project> getCitedProjects() {
+		return List.copyOf(citedProjects);
+	}
+	
 	public void addCitedProject(Project project) {
 		citedProjects.add(project);
 	}
@@ -72,6 +76,10 @@ public class FAQ {
 		return citedProjects.remove(project) ? true : false;
 	}
 	
+	public List<ProjectAssignment> getCitedProjectAssignments() {
+		return List.copyOf(citedProjectAssignments);
+	}
+
 	public void addCitedProjectAssignment(ProjectAssignment projectAssignment) {
 		citedProjectAssignments.add(projectAssignment);
 	}
@@ -80,6 +88,10 @@ public class FAQ {
 		return citedProjectAssignments.remove(projectAssignment) ? true : false;
 	}
 	
+	public List<Resource> getCitedResources() {
+		return List.copyOf(citedResources);
+	}
+
 	public void addCitedResource(Resource citedResource) {
 		citedResources.add(citedResource);
 	}
@@ -88,6 +100,10 @@ public class FAQ {
 		return citedResources.remove(citedResource) ? true : false;
 	}
 		
+	public List<Topic> getCitedTopics() {
+		return List.copyOf(citedTopics);
+	}
+
 	public void addCitedTopic(Topic topic) {
 		citedTopics.add(topic);
 	}
@@ -96,6 +112,10 @@ public class FAQ {
 		return citedTopics.remove(topic) ? true : false;
 	}
 	
+	public List<Discussion> getCitedDiscussions() {
+		return List.copyOf(citedDiscussions);
+	}
+
 	public void addCitedDiscussion(Discussion discussion) {
 		citedDiscussions.add(discussion);
 	}
@@ -104,6 +124,10 @@ public class FAQ {
 		return citedDiscussions.remove(discussion) ? true : false;
 	}
 	
+	public List<Message> getCitedMessages() {
+		return List.copyOf(citedMessages);
+	}
+
 	public void addCitedMessage(Message message) {
 		citedMessages.add(message);
 	}

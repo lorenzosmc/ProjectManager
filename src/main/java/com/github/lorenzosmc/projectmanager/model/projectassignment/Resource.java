@@ -1,6 +1,7 @@
 package com.github.lorenzosmc.projectmanager.model.projectassignment;
 
 import java.time.Instant;
+import java.util.List;
 
 import com.github.lorenzosmc.projectmanager.model.user.User;
 
@@ -13,6 +14,10 @@ public abstract class Resource {
 	private Resource previousRevision;
 	private Discussion discussion;
 
+	public List<Resource> getResources() throws UnsupportedOperationByResource{
+		throw new UnsupportedOperationByResource("Unable to retrieve resources from the resource.");
+	}
+	
 	public void addElement(Resource resource) throws UnsupportedOperationByResource{
 		throw new UnsupportedOperationByResource("Unable to add an element to the resource.");
 	}
