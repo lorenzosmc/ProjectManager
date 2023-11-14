@@ -17,6 +17,7 @@ public class FAQ {
 	private Instant creationDate;
 	private Instant lastModified;
 	private boolean visible;
+	private List<Context> contexts;
 	private List<Project> citedProjects;
 	private List<Resource> citedResources;
 	private List<Topic> citedTopics;
@@ -71,6 +72,18 @@ public class FAQ {
 		this.visible = visible;
 	}
 
+	public List<Context> getContexts() {
+		return List.copyOf(contexts);
+	}
+	
+	public void addContext(Context context) {
+		contexts.add(context);
+	}
+	
+	public boolean removeContext(Context context) {
+		return contexts.remove(context) ? true : false;
+	}
+	
 	public List<Project> getCitedProjects() {
 		return List.copyOf(citedProjects);
 	}
