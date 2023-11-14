@@ -20,20 +20,53 @@ public class Project {
 	private ProjectStatus status;
 	private int progress;
 	private Instant lastUpdate;
-	//FIXME make collection
-	private Workgroup workgroup;
+	private List<Workgroup> workgroups;
 	//TODO add number of sub projects.
-	
-	
-	//FIXME these should be in workgroup
-	private Appointment exam;
-	private Instant dateOfAssignment;
-	// private int progress; for each workgroup 
 	
 	//FIXME how do these work when multiple workgroups work on the project?
 	private List<ProjectProgressReview> reviews;
 	private List<Topic> topics;
 	private List<Resource> resources;
+	
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getStatement() {
+		return statement;
+	}
+
+	public void setStatement(String statement) {
+		this.statement = statement;
+	}
+	
+	public User getCreator() {
+		return creator;
+	}
+
+	public void setCreator(User creator) {
+		this.creator = creator;
+	}
+
+	public Instant getCreationDate() {
+		return creationDate;
+	}
+
+	public void setCreationDate(Instant creationDate) {
+		this.creationDate = creationDate;
+	}
+	
+	public boolean isVisible() {
+		return visible;
+	}
+
+	public void setVisible(boolean visible) {
+		this.visible = visible;
+	}
 	
 	public boolean isDrafted() {
 		return status == ProjectStatus.DRAFTED;
@@ -90,44 +123,17 @@ public class Project {
 		return true;
 	}
 	
-	public String getName() {
-		return name;
+	public int getProgress() {
+		return progress;
 	}
 
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getStatement() {
-		return statement;
-	}
-
-	public void setStatement(String statement) {
-		this.statement = statement;
-	}
-	
-	public User getCreator() {
-		return creator;
-	}
-
-	public void setCreator(User creator) {
-		this.creator = creator;
-	}
-
-	public Instant getCreationDate() {
-		return creationDate;
-	}
-
-	public void setCreationDate(Instant creationDate) {
-		this.creationDate = creationDate;
-	}
-	
-	public boolean isVisible() {
-		return visible;
-	}
-
-	public void setVisible(boolean visible) {
-		this.visible = visible;
+	public void setProgress(int progress) {
+		if(progress < 0)
+			this.progress = 0;
+		else if(progress > 100)
+			this.progress = 100;
+		else
+			this.progress = progress;
 	}
 	
 	public List<ProjectProgressReview> getReviews() {
@@ -166,20 +172,16 @@ public class Project {
 		resources.remove(resource);
 	}
 	
-	public Workgroup getWorkgroup() {
-		return workgroup;
+	public List<Workgroup> getWorkgroups() {
+		return List.copyOf(workgroups);
 	}
 
-	public void setWorkgroup(Workgroup workgroup) {
-		this.workgroup = workgroup;
+	public void addWorkgroup(Workgroup workgroup) {
+		workgroups.add(workgroup);
 	}
-
-	public Instant getDateOfAssignment() {
-		return dateOfAssignment;
-	}
-
-	public void setDateOfAssignment(Instant dateOfAssignment) {
-		this.dateOfAssignment = dateOfAssignment;
+	
+	public boolean removeWorkgroup(Workgroup workgroup) {
+		return workgroups.remove(workgroup) ? true : false;
 	}
 
 	public Instant getLastUpdate() {
@@ -190,27 +192,6 @@ public class Project {
 		this.lastUpdate = lastUpdate;
 	}
 	
-	public int getProgress() {
-		return progress;
-	}
-
-	public void setProgress(int progress) {
-		if(progress < 0)
-			this.progress = 0;
-		else if(progress > 100)
-			this.progress = 100;
-		else
-			this.progress = progress;
-	}
-
-	public Appointment getExam() {
-		return exam;
-	}
-
-	public void setExam(Appointment exam) {
-		this.exam = exam;
-	}
-
 	public Long getId() {
 		return id;
 	}
