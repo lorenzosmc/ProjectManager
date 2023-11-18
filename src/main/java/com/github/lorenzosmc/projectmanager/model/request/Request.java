@@ -1,7 +1,5 @@
 package com.github.lorenzosmc.projectmanager.model.request;
 
-import java.time.Duration;
-
 import com.github.lorenzosmc.projectmanager.model.appointment.Appointment;
 import com.github.lorenzosmc.projectmanager.model.notification.Notification;
 import com.github.lorenzosmc.projectmanager.model.notification.NotificationReason;

@@ -4,7 +4,7 @@ import java.time.Instant;
 
 import com.github.lorenzosmc.projectmanager.model.appointment.Appointment;
 import com.github.lorenzosmc.projectmanager.model.notification.Publisher;
-import com.github.lorenzosmc.projectmanager.model.project.Project;
+import com.github.lorenzosmc.projectmanager.model.project.Task;
 
 public class Workgroup extends Publisher{
 	private Long id;
@@ -12,7 +12,7 @@ public class Workgroup extends Publisher{
 	private boolean visible;
 	private boolean publishingConsent;
 	private WorkgroupStatus status;
-	private Project project;
+	private Task task;
 	private Instant dateOfAssignment;
 	private int progress; 
 	private Appointment exam;
@@ -53,12 +53,12 @@ public class Workgroup extends Publisher{
 		this.status = status;
 	}
 	
-	public Project getProject() {
-		return project;
+	public Task getTask() {
+		return task;
 	}
 
-	public void setProject(Project project) {
-		this.project = project;
+	public void setTask(Task task) {
+		this.task = task;
 	}
 
 	public Instant getDateOfAssignment() {

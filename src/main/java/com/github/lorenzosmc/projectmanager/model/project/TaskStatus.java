@@ -1,6 +1,6 @@
 package com.github.lorenzosmc.projectmanager.model.project;
 
-enum ProjectStatus {
+enum TaskStatus {
 	DRAFTED,
 	UNASSIGNED,
 	ACTIVE,

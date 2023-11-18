@@ -1,6 +1,6 @@
 package com.github.lorenzosmc.projectmanager.model.context;
 
 enum TagType {
-	PROJECT,
+	TASK,
 	FAQ
 }

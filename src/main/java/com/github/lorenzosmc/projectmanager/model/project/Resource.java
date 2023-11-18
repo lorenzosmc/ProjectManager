@@ -17,11 +17,12 @@ public abstract class Resource {
 	public List<Resource> getResources() throws UnsupportedOperationByResource{
 		throw new UnsupportedOperationByResource("Unable to retrieve resources from the resource.");
 	}
-	
+	//TODO change to addResource()
 	public void addElement(Resource resource) throws UnsupportedOperationByResource{
 		throw new UnsupportedOperationByResource("Unable to add an element to the resource.");
 	}
-	
+
+	//TODO change to removeResource()
 	public boolean removeElement(Resource resource) throws UnsupportedOperationByResource{
 		throw new UnsupportedOperationByResource("Unable to remove an element from the resource.");
 	}

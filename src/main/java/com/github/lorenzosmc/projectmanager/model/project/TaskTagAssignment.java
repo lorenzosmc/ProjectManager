@@ -3,8 +3,8 @@ package com.github.lorenzosmc.projectmanager.model.project;
 import com.github.lorenzosmc.projectmanager.model.context.Tag;
 import com.github.lorenzosmc.projectmanager.model.user.User;
 
-public class ProjectTagAssignment {
-	private Project project;
+public class TaskTagAssignment {
+	private Task task;
 	private Tag tag;
 	private User assigner;
 
@@ -24,12 +24,12 @@ public class ProjectTagAssignment {
 		this.tag = tag;
 	}	
 	
-	public Project getProject() {
-		return project;
+	public Task getTask() {
+		return task;
 	}
 
-	public void setProject(Project project) {
-		this.project = project;
+	public void setTask(Task task) {
+		this.task = task;
 	}
 	
 }

@@ -4,7 +4,7 @@ import java.time.Instant;
 import java.util.List;
 
 import com.github.lorenzosmc.projectmanager.model.notification.Publisher;
-import com.github.lorenzosmc.projectmanager.model.project.Project;
+import com.github.lorenzosmc.projectmanager.model.project.Task;
 import com.github.lorenzosmc.projectmanager.model.user.User;
 
 public class Context extends Publisher{
@@ -12,24 +12,13 @@ public class Context extends Publisher{
 	private String name;
 	private User creator;
 	private Instant creationDate;
-	private List<Project> projects;
+	private List<Task> tasks;
 	private boolean locked;
 	private boolean hidden;
 	// FIXME: better way to store passwords?
 	private String password;
 	private List<Tag> tags;
-	
-	public List<Tag> getTags() {
-		return List.copyOf(tags);
-	}
-
-	public void addTag(Tag tag) {
-		tags.add(tag);
-	}
-	
-	public boolean removeTag(Tag tag) {
-		return tags.remove(tag) ? true : false;
-	}
+	private List<FAQ> faqs;
 	
 	public Long getId() {
 		return id;
@@ -63,16 +52,16 @@ public class Context extends Publisher{
 		this.creationDate = creationDate;
 	}
 	
-	public List<Project> getProjects() {
-		return projects;
+	public List<Task> getTasks() {
+		return List.copyOf(tasks);
 	}
 
-	public void addProject(Project project) {
-		projects.add(project);
+	public void addTask(Task task) {
+		tasks.add(task);
 	}
 	
-	public boolean removeProject(Project project) {
-		return projects.remove(project) ? true : false;
+	public boolean removeTask(Task task) {
+		return tasks.remove(task) ? true : false;
 	}
 	
 	public boolean isLocked() {
@@ -99,5 +88,29 @@ public class Context extends Publisher{
 	// FIXME: better way to set passwords?
 	public void setPassword(String password) {
 		this.password = password;
+	}
+	
+	public List<Tag> getTags() {
+		return List.copyOf(tags);
+	}
+
+	public void addTag(Tag tag) {
+		tags.add(tag);
+	}
+	
+	public boolean removeTag(Tag tag) {
+		return tags.remove(tag) ? true : false;
+	}
+	
+	public List<FAQ> getFaqs() {
+		return List.copyOf(faqs);
+	}
+
+	public void addFAQ(FAQ faq) {
+		faqs.add(faq);
+	}
+	
+	public boolean removeFAQ(FAQ faq) {
+		return faqs.remove(faq) ? true : false;
 	}
 }

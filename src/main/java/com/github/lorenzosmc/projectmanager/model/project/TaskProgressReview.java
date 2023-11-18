@@ -4,7 +4,7 @@ import java.time.Instant;
 
 import com.github.lorenzosmc.projectmanager.model.user.User;
 
-public class ProjectProgressReview {
+public class TaskProgressReview {
 	private String message;
 	private Instant dateOfReview;
 	private User reqeuestor;

@@ -6,6 +6,7 @@ import com.github.lorenzosmc.projectmanager.model.context.Context;
 import com.github.lorenzosmc.projectmanager.model.notification.Notification;
 import com.github.lorenzosmc.projectmanager.model.notification.Subscriber;
 import com.github.lorenzosmc.projectmanager.model.project.Project;
+import com.github.lorenzosmc.projectmanager.model.project.Task;
 
 public class User implements Subscriber {
 	private Long id;
@@ -26,6 +27,7 @@ public class User implements Subscriber {
 	private String about;
 	private List<Context> createdContexts;
 	private List<Project> createdProjects;
+	private List<Task> createdTasks;
 
 	public void update(Notification notification) {
 		this.addNotification(notification);
@@ -191,5 +193,17 @@ public class User implements Subscriber {
 	
 	public boolean removeCreatedProject(Project project){
 		return createdProjects.remove(project) ? true : false;
+	}
+	
+	public List<Task> getCreatedTasks() {
+		return List.copyOf(createdTasks);
+	}
+	
+	public void addCreatedProject(Task task) {
+		createdTasks.add(task);
+	}
+	
+	public boolean removeCreatedProject(Task task){
+		return createdTasks.remove(task) ? true : false;
 	}
 }

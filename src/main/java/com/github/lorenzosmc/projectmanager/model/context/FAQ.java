@@ -7,6 +7,7 @@ import com.github.lorenzosmc.projectmanager.model.project.Discussion;
 import com.github.lorenzosmc.projectmanager.model.project.Message;
 import com.github.lorenzosmc.projectmanager.model.project.Project;
 import com.github.lorenzosmc.projectmanager.model.project.Resource;
+import com.github.lorenzosmc.projectmanager.model.project.Task;
 import com.github.lorenzosmc.projectmanager.model.project.Topic;
 
 public class FAQ {
@@ -19,6 +20,7 @@ public class FAQ {
 	private boolean visible;
 	private List<Context> contexts;
 	private List<Project> citedProjects;
+	private List<Task> citedTasks;
 	private List<Resource> citedResources;
 	private List<Topic> citedTopics;
 	private List<Discussion> citedDiscussions;
@@ -94,6 +96,18 @@ public class FAQ {
 	
 	public boolean removeCitedProject(Project project) {
 		return citedProjects.remove(project) ? true : false;
+	}
+	
+	public List<Task> getCitedTasks() {
+		return List.copyOf(citedTasks);
+	}
+	
+	public void addCitedTask(Task task) {
+		citedTasks.add(task);
+	}
+	
+	public boolean removeCitedTask(Task task) {
+		return citedTasks.remove(task) ? true : false;
 	}
 	
 	public List<Resource> getCitedResources() {
