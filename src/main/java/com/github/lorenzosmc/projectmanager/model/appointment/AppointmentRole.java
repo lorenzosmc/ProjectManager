@@ -1,6 +1,6 @@
 package com.github.lorenzosmc.projectmanager.model.appointment;
 
-enum AttendanceRole {
+enum AppointmentRole {
 	EXAMINER,
 	EXAMINEE,
 	ATTENDEE

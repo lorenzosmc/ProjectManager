@@ -2,15 +2,40 @@ package com.github.lorenzosmc.projectmanager.model.notification;
 
 import java.time.Instant;
 
-public class Notification {
+import javax.persistence.Embeddable;
+import javax.persistence.Embedded;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.OneToOne;
+
+import com.github.lorenzosmc.projectmanager.model.BaseEntity;
+
+@Entity
+public class Notification extends BaseEntity{
+	@Enumerated(EnumType.STRING)
 	private NotificationType type;
+	
+	//FIXME how to deal with Object in JPA?
 	private Object object;
+	
+	@Enumerated(EnumType.STRING)
 	private NotificationReason reason;
+	
 	private String message;
+	
+	//FIXME need to use java.time.OffsetDateTime instead? Don't see JPA 2.2 supporting java.time.Instant
 	private Instant creationDate;
+	
 	private boolean viewed;
+	
 	private boolean hidden;
 
+	
+	//TODO override equals() and hashCode()
+	
 	public Notification(NotificationType type, NotificationReason reason, Object object) {
 		this.type = type;
 		this.object = object;
@@ -18,6 +43,12 @@ public class Notification {
 		this.creationDate = Instant.now();
 		this.viewed = false;
 		this.hidden = false;
+	}
+
+	public Notification() {}
+	
+	public Notification(String uuid) {
+		super(uuid);
 	}
 
 	public NotificationType getType() {

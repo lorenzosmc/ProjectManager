@@ -1,6 +1,7 @@
 package com.github.lorenzosmc.projectmanager.model.context;
 
-enum FAQStatus {
-	DRAFTED,
-	POSTED
+enum ContextRole {
+	PROFESSOR,
+	COLLABORATOR,
+	STUDENT
 }

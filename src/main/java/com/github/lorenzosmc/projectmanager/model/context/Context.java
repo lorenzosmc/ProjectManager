@@ -3,29 +3,65 @@ package com.github.lorenzosmc.projectmanager.model.context;
 import java.time.Instant;
 import java.util.List;
 
+import javax.persistence.ElementCollection;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+
 import com.github.lorenzosmc.projectmanager.model.notification.Publisher;
 import com.github.lorenzosmc.projectmanager.model.project.Task;
+import com.github.lorenzosmc.projectmanager.model.request.Request;
 import com.github.lorenzosmc.projectmanager.model.user.User;
+import com.github.lorenzosmc.projectmanager.model.workgroup.Workgroup;
 
+@Entity
 public class Context extends Publisher{
-	private Long id;
 	private String name;
+	
+	@ManyToOne(fetch = FetchType.LAZY)
 	private User creator;
+	
+	//FIXME need to use java.time.OffsetDateTime instead? Don't see JPA 2.2 supporting java.time.Instant
 	private Instant creationDate;
+	
+	@OneToMany(mappedBy = "context")
 	private List<Task> tasks;
+	
 	private boolean locked;
+	
 	private boolean hidden;
+	
 	// FIXME: better way to store passwords?
 	private String password;
+	
+	@OneToMany(mappedBy = "context")
 	private List<Tag> tags;
+	
+	@ManyToMany(mappedBy = "contexts")
 	private List<FAQ> faqs;
 	
-	public Long getId() {
-		return id;
-	}
+	//TODO add methods and JPA
+	private List<Request> requests;
+	
+	//TODO
+	private List<ContextParticipation> participants;
+	
+	//TODO
+	private List<Workgroup> workgroups;
+	
+	//TODO
+	private List<ContextCollaboration> collaborations;
+	
+	
 
-	public void setId(Long id) {
-		this.id = id;
+	//TODO override equals() and hashCode()
+	
+	public Context() {}
+	
+	public Context(String uuid) {
+		super(uuid);
 	}
 
 	public String getName() {
@@ -53,7 +89,9 @@ public class Context extends Publisher{
 	}
 	
 	public List<Task> getTasks() {
-		return List.copyOf(tasks);
+		//FIXME
+		//return List.copyOf(tasks);
+		return tasks;
 	}
 
 	public void addTask(Task task) {
@@ -91,7 +129,9 @@ public class Context extends Publisher{
 	}
 	
 	public List<Tag> getTags() {
-		return List.copyOf(tags);
+		//FIXME
+		//return List.copyOf(tags);
+		return tags;
 	}
 
 	public void addTag(Tag tag) {
@@ -103,7 +143,9 @@ public class Context extends Publisher{
 	}
 	
 	public List<FAQ> getFaqs() {
-		return List.copyOf(faqs);
+		//FIXME
+		//return List.copyOf(faqs);
+		return faqs;
 	}
 
 	public void addFAQ(FAQ faq) {

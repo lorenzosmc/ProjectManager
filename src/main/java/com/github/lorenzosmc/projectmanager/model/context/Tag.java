@@ -2,11 +2,32 @@ package com.github.lorenzosmc.projectmanager.model.context;
 
 import java.time.Instant;
 
-public class Tag {
+import javax.persistence.Embeddable;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+
+import com.github.lorenzosmc.projectmanager.model.BaseEntity;
+
+@Entity
+public class Tag extends BaseEntity{
 	private String name;
+
+	@Enumerated(EnumType.STRING)
 	private TagType type;
+	
+	//FIXME need to use java.time.OffsetDateTime instead? Don't see JPA 2.2 supporting java.time.Instant
 	private Instant creationDate;
+	
+	//FIXME need to use java.time.OffsetDateTime instead? Don't see JPA 2.2 supporting java.time.Instant
 	private Instant lastModified;
+
+	
+	public Tag() {}
+	
+	public Tag(String uuid) {
+		super(uuid);
+	}
 
 	public String getName() {
 		return name;

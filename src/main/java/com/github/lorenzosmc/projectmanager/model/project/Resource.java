@@ -3,29 +3,64 @@ package com.github.lorenzosmc.projectmanager.model.project;
 import java.time.Instant;
 import java.util.List;
 
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
+
+import com.github.lorenzosmc.projectmanager.model.notification.Publisher;
 import com.github.lorenzosmc.projectmanager.model.user.User;
 
-public abstract class Resource {
+@Entity
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+public abstract class Resource extends Publisher{
 	private String name;
+	
+	//FIXME need to use java.time.OffsetDateTime instead? Don't see JPA 2.2 supporting java.time.Instant
 	private Instant creationDate;
+	
+	@ManyToOne(fetch = FetchType.LAZY, optional = false)
 	private User creator;
+	
 	private int size;
+	
 	private int revisionNumber;
+	
+	//FIXME is this a problem for JPA?
+	@OneToOne
 	private Resource previousRevision;
+	
+	
+	@OneToOne(optional = false)
 	private Discussion discussion;
 
-	public List<Resource> getResources() throws UnsupportedOperationByResource{
-		throw new UnsupportedOperationByResource("Unable to retrieve resources from the resource.");
-	}
-	//TODO change to addResource()
-	public void addElement(Resource resource) throws UnsupportedOperationByResource{
-		throw new UnsupportedOperationByResource("Unable to add an element to the resource.");
+	
+	//TODO override equals() and hashCode()
+
+	public Resource() {}
+	
+	public Resource(String uuid) {
+		super(uuid);
 	}
 
-	//TODO change to removeResource()
-	public boolean removeElement(Resource resource) throws UnsupportedOperationByResource{
-		throw new UnsupportedOperationByResource("Unable to remove an element from the resource.");
+	public List<Resource> getResource() throws UnsupportedOperationByResource{
+		throw new UnsupportedOperationByResource("Unable to retrieve resources.");
 	}
+
+	public void addResource(Resource resource) throws UnsupportedOperationByResource{
+		throw new UnsupportedOperationByResource("Unable to add a resource.");
+	}
+
+	public boolean removeResource(Resource resource) throws UnsupportedOperationByResource{
+		throw new UnsupportedOperationByResource("Unable to remove a resource.");
+	}
+	
+	public void setResource(Resource resource) throws UnsupportedOperationByResource{
+		throw new UnsupportedOperationByResource("Unable to set resiyrces.");
+	}
+	
 	
 	public String getName() {
 		return name;
@@ -35,6 +70,7 @@ public abstract class Resource {
 		this.name = name;
 	}
 
+	
 	public Instant getCreationDate() {
 		return creationDate;
 	}
@@ -43,6 +79,7 @@ public abstract class Resource {
 		this.creationDate = creationDate;
 	}
 
+	
 	public User getCreator() {
 		return creator;
 	}
@@ -51,6 +88,7 @@ public abstract class Resource {
 		this.creator = creator;
 	}
 
+	
 	public int getSize() {
 		return size;
 	}
@@ -59,6 +97,7 @@ public abstract class Resource {
 		this.size = size;
 	}
 
+	
 	public int getRevisionNumber() {
 		return revisionNumber;
 	}
@@ -67,6 +106,7 @@ public abstract class Resource {
 		this.revisionNumber = revisionNumber;
 	}
 
+	
 	public Resource getPreviousRevision() {
 		return previousRevision;
 	}
@@ -75,12 +115,11 @@ public abstract class Resource {
 		this.previousRevision = previousRevision;
 	}
 
-	//FIXME defensive copy
+	
 	public Discussion getDiscussion() {
 		return discussion;
 	}
 
-	//FIXME defensive copy
 	public void setDiscussion(Discussion discussion) {
 		this.discussion = discussion;
 	}

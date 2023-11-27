@@ -2,22 +2,35 @@ package com.github.lorenzosmc.projectmanager.model.context;
 
 import java.time.Instant;
 
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
+
+import com.github.lorenzosmc.projectmanager.model.BaseEntity;
 import com.github.lorenzosmc.projectmanager.model.user.User;
 
-public class FAQTagAssignment {
-	private FAQ faq;
+@Entity
+public class FAQTagAssignment extends BaseEntity{
+	@OneToOne(optional = false)
 	private Tag tag;
+	
+	//FIXME need to use java.time.OffsetDateTime instead? Don't see JPA 2.2 supporting java.time.Instant
 	private Instant dateOfAssignment;
+	
+	@ManyToOne(fetch = FetchType.LAZY, optional = false)
 	private User assigner;
 
-	public FAQ getFaq() {
-		return faq;
+
+	//TODO override equals() and hashCode()
+
+	public FAQTagAssignment() {}
+	
+	public FAQTagAssignment(String uuid) {
+		super(uuid);
 	}
 
-	public void setFaq(FAQ faq) {
-		this.faq = faq;
-	}
-
+	
 	public Tag getTag() {
 		return tag;
 	}
@@ -26,6 +39,7 @@ public class FAQTagAssignment {
 		this.tag = tag;
 	}
 
+	
 	public Instant getDateOfAssignment() {
 		return dateOfAssignment;
 	}
@@ -34,6 +48,7 @@ public class FAQTagAssignment {
 		this.dateOfAssignment = dateOfAssignment;
 	}
 
+	
 	public User getAssigner() {
 		return assigner;
 	}

@@ -2,24 +2,95 @@ package com.github.lorenzosmc.projectmanager.model.appointment;
 
 import java.time.Duration;
 import java.time.Instant;
+import java.util.List;
 
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+
+import com.github.lorenzosmc.projectmanager.model.context.Context;
 import com.github.lorenzosmc.projectmanager.model.notification.Notification;
 import com.github.lorenzosmc.projectmanager.model.notification.NotificationReason;
 import com.github.lorenzosmc.projectmanager.model.notification.NotificationType;
 import com.github.lorenzosmc.projectmanager.model.notification.Publisher;
+import com.github.lorenzosmc.projectmanager.model.user.User;
 
+@Entity
 public class Appointment extends Publisher {
-	private Long id;
+	@ManyToOne(fetch = FetchType.LAZY, optional = false)
+	private User creator;
+	
+	//FIXME need to use java.time.OffsetDateTime instead? Don't see JPA 2.2 supporting java.time.Instant
+	private Instant creationDate;
+	
+	@ManyToOne(fetch = FetchType.LAZY, optional = false)
+	private Context context;
+	
+	//FIXME need to use java.time.OffsetDateTime instead? Don't see JPA 2.2 supporting java.time.Instant
 	private Instant startDate;
+	
+	//FIXME need to use some other class from java.timeTime? Perhaps just an integer representing minutes.
 	private Duration duration;
+	
 	private String location;
+	
+	@Enumerated(EnumType.STRING)
 	private AppointmentType type;
+	
+	@Enumerated(EnumType.STRING)
 	private AppointmentStatus status;
+		
 	private int examScore;
+	
 	private boolean examPassed;
+	
 	private String meetingTopic;
+	
 	private String meetingTopicDetailed;
+	
+	@OneToMany(mappedBy = "appointment")
+	private List<AppointmentParticipation> participants;
 
+	
+	//TODO override equals() and hashCode()
+
+	public Appointment() {}
+	
+	public Appointment(String uuid) {
+		super(uuid);
+	}
+
+	
+	public User getCreator() {
+		return creator;
+	}
+
+	public void setCreator(User creator) {
+		this.creator = creator;
+	}
+
+	
+	public Instant getCreationDate() {
+		return creationDate;
+	}
+
+	public void setCreationDate(Instant creationDate) {
+		this.creationDate = creationDate;
+	}
+
+	
+	public Context getContext() {
+		return context;
+	}
+
+	public void setContext(Context context) {
+		this.context = context;
+	}
+	
+	
 	public boolean schedule() {
 		if (isAvailable()) {
 			status = AppointmentStatus.SCHEDULED;
@@ -70,10 +141,7 @@ public class Appointment extends Publisher {
 		return status == AppointmentStatus.CONCLUDED;
 	}
 
-	public Long getId() {
-		return id;
-	}
-
+	
 	public Instant getStartDate() {
 		return startDate;
 	}
@@ -86,6 +154,7 @@ public class Appointment extends Publisher {
 		return false;
 	}
 
+	
 	public Duration getDuration() {
 		return duration;
 	}
@@ -94,6 +163,7 @@ public class Appointment extends Publisher {
 		this.duration = duration;
 	}
 
+	
 	public String getLocation() {
 		return location;
 	}
@@ -106,6 +176,7 @@ public class Appointment extends Publisher {
 		return false;
 	}
 
+	
 	public AppointmentType getType() {
 		return type;
 	}
@@ -114,6 +185,7 @@ public class Appointment extends Publisher {
 		this.type = type;
 	}
 
+	
 	public AppointmentStatus getStatus() {
 		return status;
 	}
@@ -122,6 +194,7 @@ public class Appointment extends Publisher {
 		this.status = status;
 	}
 
+	
 	public int getExamScore() {
 		return examScore;
 	}
@@ -130,6 +203,7 @@ public class Appointment extends Publisher {
 		this.examScore = score;
 	}
 
+	
 	public boolean isExamPassed() {
 		return examPassed;
 	}
@@ -138,6 +212,7 @@ public class Appointment extends Publisher {
 		this.examPassed = passed;
 	}
 
+	
 	public String getMeetingTopic() {
 		return meetingTopic;
 	}
@@ -146,11 +221,31 @@ public class Appointment extends Publisher {
 		this.meetingTopic = topic;
 	}
 
+	
 	public String getMeetingTopicDetailed() {
 		return meetingTopicDetailed;
 	}
 
 	public void setMeetingTopicDetailed(String detailedDescription) {
 		this.meetingTopicDetailed = detailedDescription;
+	}
+
+	
+	
+	public List<AppointmentParticipation> getParticipants() {
+		return participants;
+	}
+	
+
+	public void setParticipants(List<AppointmentParticipation> participants) {
+		this.participants = participants;
+	}
+
+	public void addParticipant(AppointmentParticipation participant) {
+		participants.add(participant);
+	}
+	
+	public boolean removeParticipant(AppointmentParticipation participant) {
+		return participants.remove(participant) ? true : false;
 	}
 }

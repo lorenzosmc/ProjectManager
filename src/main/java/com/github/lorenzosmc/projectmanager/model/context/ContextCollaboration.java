@@ -3,28 +3,47 @@ package com.github.lorenzosmc.projectmanager.model.context;
 import java.time.Instant;
 import java.util.List;
 
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+
+import com.github.lorenzosmc.projectmanager.model.BaseEntity;
 import com.github.lorenzosmc.projectmanager.model.project.Task;
 import com.github.lorenzosmc.projectmanager.model.user.User;
 
-public class ContextCollaboration {
+@Entity
+public class ContextCollaboration extends BaseEntity {
+	@ManyToOne(fetch = FetchType.LAZY, optional = false)
 	private User collaborator;
+	
+	@ManyToOne(fetch = FetchType.LAZY, optional = false)
 	private Context context;
+	
 	private Instant startDate;
-	private List<Task> collaborations;
-	private int maxProjects;
+	
+	@ManyToOne(fetch = FetchType.LAZY, optional = false)
+	private Task task;
 
-	public List<Task> getCollaborations() {
-		return List.copyOf(collaborations);
+	
+	//TODO override equals() and hashCode()
+	
+	public ContextCollaboration() {}
+	
+	public ContextCollaboration(String uuid) {
+		super(uuid);
 	}
 
-	public void addCollaboration(Task collaboration) {
-		collaborations.add(collaboration);
+	public Task getTask() {
+		//FIXME defensive copy
+		return task;
 	}
 	
-	public boolean removeCollaboration(Task collaboration) {
-		return collaborations.remove(collaboration) ? true : false;
+	public void setTask(Task task) {
+		this.task = task;
 	}
-		
+	
+	
 	public User getCollaborator() {
 		return collaborator;
 	}
@@ -33,6 +52,7 @@ public class ContextCollaboration {
 		this.collaborator = collaborator;
 	}
 
+	
 	public Context getContext() {
 		return context;
 	}
@@ -41,20 +61,13 @@ public class ContextCollaboration {
 		this.context = context;
 	}
 
+	
 	public Instant getStartDate() {
 		return startDate;
 	}
 
 	public void setStartDate(Instant startDate) {
 		this.startDate = startDate;
-	}
-
-	public int getMaxProjects() {
-		return maxProjects;
-	}
-
-	public void setMaxProjects(int maxProjects) {
-		this.maxProjects = maxProjects;
 	}
 
 }

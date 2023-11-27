@@ -3,30 +3,73 @@ package com.github.lorenzosmc.projectmanager.model.project;
 import java.time.Instant;
 import java.util.List;
 
+import javax.persistence.ElementCollection;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+
+import com.github.lorenzosmc.projectmanager.model.context.Context;
+import com.github.lorenzosmc.projectmanager.model.context.ContextCollaboration;
 import com.github.lorenzosmc.projectmanager.model.notification.Publisher;
 import com.github.lorenzosmc.projectmanager.model.user.User;
 import com.github.lorenzosmc.projectmanager.model.workgroup.Workgroup;
 
 public class Task extends Publisher{
-	private Long id;
 	private String name;
+	
 	private String statement;
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	private Context context;
+	
+	@ManyToOne(fetch = FetchType.LAZY)
 	private User creator;
+	
+	//FIXME need to use java.time.OffsetDateTime instead? Don't see JPA 2.2 supporting java.time.Instant
 	private Instant creationDate;
+	
 	private boolean visible;
+	
+	@Enumerated(EnumType.STRING)
 	TaskStatus status;
+	
 	private int progress;
+	
+	//FIXME need to use java.time.OffsetDateTime instead? Don't see JPA 2.2 supporting java.time.Instant
 	private Instant lastUpdateDate;
+	
 	private Workgroup workgroup;
+	
+	@ManyToOne(fetch = FetchType.LAZY)
 	private Project project;	
+	
+	@OneToMany
 	private List<Topic> topics;
+	
+	@OneToMany
 	private List<Resource> resources;
+	
+	@OneToMany
 	private List<TaskProgressReview> reviews;
+	
+	@ElementCollection
+	private List<TaskTagAssignment> tagAssignments;
 
-	public Long getId() {
-		return id;
+	@OneToMany(mappedBy = "")
+	private List<ContextCollaboration> collaborations;
+	
+	
+	//TODO override equals() and hashCode()
+	
+	public Task() {}
+	
+	public Task(String uuid) {
+		super(uuid);
 	}
 
+	
 	public String getName() {
 		return name;
 	}
@@ -35,6 +78,7 @@ public class Task extends Publisher{
 		this.name = name;
 	}
 
+	
 	public String getStatement() {
 		return statement;
 	}
@@ -43,6 +87,16 @@ public class Task extends Publisher{
 		this.statement = statement;
 	}
 
+	
+	public Context getContext() {
+		return context;
+	}
+
+	public void setContext(Context context) {
+		this.context = context;
+	}
+
+	
 	public User getCreator() {
 		return creator;
 	}
@@ -51,6 +105,7 @@ public class Task extends Publisher{
 		this.creator = creator;
 	}
 
+	
 	public Instant getCreationDate() {
 		return creationDate;
 	}
@@ -60,6 +115,7 @@ public class Task extends Publisher{
 		this.creationDate = creationDate;
 	}
 
+	
 	public boolean isVisible() {
 		return visible;
 	}
@@ -68,6 +124,7 @@ public class Task extends Publisher{
 		this.visible = visible;
 	}
 
+	
 	public boolean isDrafted() {
 		return status == TaskStatus.DRAFTED;
 	}
@@ -100,6 +157,7 @@ public class Task extends Publisher{
 		status = TaskStatus.ARCHIVED;
 	}
 
+	
 	public int getProgress() {
 		return progress;
 	}
@@ -113,6 +171,7 @@ public class Task extends Publisher{
 			this.progress = progress;
 	}
 
+	
 	public Instant getLastUpdateDate() {
 		return lastUpdateDate;
 	}
@@ -121,6 +180,7 @@ public class Task extends Publisher{
 		this.lastUpdateDate = lastUpdate;
 	}
 
+	
 	public Workgroup getWorkgroup() {
 		return workgroup;
 	}
@@ -129,6 +189,7 @@ public class Task extends Publisher{
 		this.workgroup = workgroup;
 	}
 
+	
 	public Project getProject() {
 		return project;
 	}
@@ -137,8 +198,11 @@ public class Task extends Publisher{
 		this.project = project;
 	}
 	
+	//TODO add setter
 	public List<Topic> getTopics() {
-		return List.copyOf(topics);
+		//FIXME
+		//return List.copyOf(topics);
+		return topics;
 	}
 	
 	public void addTopic(Topic topic) {
@@ -149,10 +213,51 @@ public class Task extends Publisher{
 		topics.remove(topic);
 	}
 	
+	//TODO add setter
 	public List<Resource> getResources() {
-		return List.copyOf(resources);
+		//FIXME
+		//return List.copyOf(resources);
+		return resources;
 	}
 	
+	public TaskStatus getStatus() {
+		return status;
+	}
+
+	public void setStatus(TaskStatus status) {
+		this.status = status;
+	}
+
+	public List<TaskTagAssignment> getTagAssignments() {
+		return tagAssignments;
+	}
+
+	public void setTagAssignments(List<TaskTagAssignment> tagAssignments) {
+		this.tagAssignments = tagAssignments;
+	}
+
+	public List<ContextCollaboration> getCollaborations() {
+		return collaborations;
+	}
+	
+	//TODO add addTagAssignemnt() and removeTagAssignent(), same for other collections.
+
+	public void setCollaborations(List<ContextCollaboration> collaborations) {
+		this.collaborations = collaborations;
+	}
+
+	public void setTopics(List<Topic> topics) {
+		this.topics = topics;
+	}
+
+	public void setResources(List<Resource> resources) {
+		this.resources = resources;
+	}
+
+	public void setReviews(List<TaskProgressReview> reviews) {
+		this.reviews = reviews;
+	}
+
 	public void addResource(Resource resource) {
 		resources.add(resource);
 	}
@@ -161,8 +266,11 @@ public class Task extends Publisher{
 		resources.remove(resource);
 	}
 	
+	//TODO add setter
 	public List<TaskProgressReview> getReviews() {
-		return List.copyOf(reviews);
+		//FIXME
+		//return List.copyOf(reviews);
+		return reviews;
 	}
 	
 	public void addReview(TaskProgressReview review) {
@@ -173,7 +281,8 @@ public class Task extends Publisher{
 		reviews.remove(review);
 	}
 	
-//	FIXME move this to business logic, so that you can handle ProjectCluster and Task interaction
+	
+//	TODO move this to business logic, so that you can handle ProjectCluster and Task interaction
 //	public boolean advanceState() {
 //		switch(status) {
 //			case DRAFTED:
